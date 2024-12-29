@@ -91,6 +91,82 @@ Aider offers several advanced features, including:
 - **Code Refactoring**: Refactor existing code to improve its structure and readability.
 - **Error Detection**: Identify and fix errors in your code.
 
+## Custom Configuration Files
+Yes, you can create a file with a different name (e.g., `.aider-2.conf.yml` or `.aider-3.conf.yml`) and load it into Aider. However, Aider does not natively support loading custom configuration files directly. Instead, you can use one of the following approaches:
+
+---
+
+### **Option 1: Rename the File Temporarily**
+1. Rename your custom configuration file (e.g., `.aider-2.conf.yml`) to `.aider.conf.yml`.
+2. Run Aider. It will automatically use the `.aider.conf.yml` file.
+3. After using Aider, rename the file back to its original name.
+
+---
+
+### **Option 2: Use Environment Variables**
+Aider supports configuration via environment variables. You can:
+1. Copy the contents of your custom configuration file (e.g., `.aider-2.conf.yml`) into environment variables.
+2. Run Aider with these environment variables set.
+
+For example:
+```bash
+export AIDER_MODEL=gpt-4
+export AIDER_TEMPERATURE=0.7
+aider
+```
+
+---
+
+### **Option 3: Manually Merge Configurations**
+1. Create a `.aider.conf.yml` file.
+2. Manually merge the contents of your custom configuration file (e.g., `.aider-2.conf.yml`) into `.aider.conf.yml`.
+3. Run Aider.
+
+---
+
+### **Option 4: Use a Script to Load Custom Configurations**
+Write a script to:
+1. Copy your custom configuration file (e.g., `.aider-2.conf.yml`) to `.aider.conf.yml`.
+2. Run Aider.
+3. Restore the original `.aider.conf.yml` (if it existed).
+
+Example script (`run-aider.sh`):
+```bash
+#!/bin/bash
+
+# Backup existing .aider.conf.yml
+if [ -f .aider.conf.yml ]; then
+    mv .aider.conf.yml .aider.conf.yml.bak
+fi
+
+# Copy custom config
+cp .aider-2.conf.yml .aider.conf.yml
+
+# Run Aider
+aider
+
+# Restore original config
+if [ -f .aider.conf.yml.bak ]; then
+    mv .aider.conf.yml.bak .aider.conf.yml
+fi
+```
+
+Run the script:
+```bash
+chmod +x run-aider.sh
+./run-aider.sh
+```
+
+---
+
+### **Option 5: Request Aider to Support Custom Config Files**
+If you'd like Aider to natively support custom configuration files, you can request this feature from the Aider maintainers or contribute to the project.
+
+---
+
+### Summary
+While Aider does not directly support loading custom configuration files, you can use one of the above workarounds to achieve the same result. The **script-based approach** (Option 4) is the most flexible and reusable.
+
 ## Troubleshooting
 If you encounter any issues while using Aider, consider the following:
 
