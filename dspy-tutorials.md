@@ -97,6 +97,53 @@ DSPy can be extended to work with external AI providers like DeepSeek. Here's an
 
 This example demonstrates how to integrate DeepSeek into your DSPy pipeline. You can adapt this pattern for other providers by creating custom steps that interface with their APIs or SDKs.
 
+### 6. **Integration with OpenAI-Compatible Providers**
+DSPy can be extended to work with OpenAI-compatible API providers. Here's an example of how to create a custom step for an OpenAI-compatible provider:
+
+#### Example: OpenAI-Compatible Provider Integration
+1. **Install OpenAI SDK**:
+   ```bash
+   pip install openai
+   ```
+
+2. **Create a Custom OpenAI-Compatible Step**:
+   ```python
+   import dspy
+   import openai
+
+   class OpenAICompatibleStep(dspy.Step):
+       def __init__(self, api_key, base_url, model_id):
+           self.api_key = api_key
+           self.base_url = base_url
+           self.model_id = model_id
+           openai.api_key = self.api_key
+           openai.api_base = self.base_url
+
+       def process(self, data):
+           # Process data using the OpenAI-compatible API
+           response = openai.Completion.create(
+               model=self.model_id,
+               prompt=data,
+               max_tokens=100
+           )
+           return response.choices[0].text
+   ```
+
+3. **Add the OpenAI-Compatible Step to Your Pipeline**:
+   ```python
+   pipeline = dspy.Pipeline()
+   pipeline.add_step(dspy.DataLoader())
+   pipeline.add_step(OpenAICompatibleStep(
+       api_key="your-api-key",
+       base_url="https://glhf.chat/api/openai/v1",
+       model_id="hf:meta-llama/Llama-3.3-70B-Instruct"
+   ))
+   pipeline.add_step(dspy.ModelTrainer())
+   pipeline.run()
+   ```
+
+This example demonstrates how to integrate an OpenAI-compatible API provider into your DSPy pipeline. You can adapt this pattern for other providers by creating custom steps that interface with their APIs.
+
 ## Troubleshooting
 If you encounter any issues while using DSPy, consider the following:
 
