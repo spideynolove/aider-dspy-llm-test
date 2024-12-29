@@ -21,7 +21,7 @@ class OpenAICompatibleStep(dspy.Step):
 # Example usage
 if __name__ == "__main__":
     # Replace with your actual API key
-    api_key = "your-api-key"
+    api_key = "glhf_544c3ea34a2f1d6ea03bf6e1709cd759"
     base_url = "https://glhf.chat/api/openai/v1"
     model_id = "hf:meta-llama/Llama-3.3-70B-Instruct"
 
