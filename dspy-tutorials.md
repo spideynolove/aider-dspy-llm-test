@@ -62,6 +62,41 @@ DSPy integrates seamlessly with popular frameworks like TensorFlow, PyTorch, and
 ### 4. **Visualization**
 Use DSPy's visualization tools to inspect pipeline performance and debug issues.
 
+### 5. **Integration with External Providers**
+DSPy can be extended to work with external AI providers like DeepSeek. Here's an example of how to create a custom step for DeepSeek:
+
+#### Example: DeepSeek Integration
+1. **Install DeepSeek SDK**:
+   ```bash
+   pip install deepseek-sdk
+   ```
+
+2. **Create a Custom DeepSeek Step**:
+   ```python
+   import dspy
+   from deepseek import DeepSeekClient
+
+   class DeepSeekStep(dspy.Step):
+       def __init__(self, api_key):
+           self.client = DeepSeekClient(api_key)
+
+       def process(self, data):
+           # Process data using DeepSeek
+           result = self.client.process(data)
+           return result
+   ```
+
+3. **Add the DeepSeek Step to Your Pipeline**:
+   ```python
+   pipeline = dspy.Pipeline()
+   pipeline.add_step(dspy.DataLoader())
+   pipeline.add_step(DeepSeekStep(api_key="your-deepseek-api-key"))
+   pipeline.add_step(dspy.ModelTrainer())
+   pipeline.run()
+   ```
+
+This example demonstrates how to integrate DeepSeek into your DSPy pipeline. You can adapt this pattern for other providers by creating custom steps that interface with their APIs or SDKs.
+
 ## Troubleshooting
 If you encounter any issues while using DSPy, consider the following:
 
