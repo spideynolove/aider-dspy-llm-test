@@ -1,0 +1,624 @@
+     
+
+# Feature-engine[\#](#feature-engine)
+
+## A user-friendly feature engineering alternative to Scikit-learn[\#](#a-user-friendly-feature-engineering-alternative-to-scikit-learn)
+
+**Feature-engine rocks!**[\#](#id1)
+
+Feature-engine is a Python library with multiple transformers to
+engineer and select features for machine learning models.
+Feature-engine, like Scikit-learn, uses the methods `fit()` and
+`transform()` to learn parameters from and then transform the data.
+
+### Working with dataframes? 👉 Feature-engine is a no-brainer[\#](#working-with-dataframes-feature-engine-is-a-no-brainer)
+
+Unlike Scikit-learn, Feature-engine is designed to work with dataframes.
+No column order or name changes. A dataframe comes in, same dataframe
+comes out, with the transformed variables.
+
+We normally apply different feature engineering processes to different
+feature subsets. With sklearn, we restrict the feature engineering
+techniques to a certain group of variables by using an auxiliary class:
+the `ColumnTransformer`. This class also results in a change in the name
+of the variables after the transformation.
+
+Feature-engine, instead, allows you to select the variables you want to
+transform **within** each transformer. This way, different engineering
+procedures can be easily applied to different feature subsets without
+the need for additional transformers or changes in the feature names.
+
+### Sitting at the interface of pandas and scikit-learn[\#](#sitting-at-the-interface-of-pandas-and-scikit-learn)
+
+Pandas is great for data analysis and transformation. We ❤️ it too. But
+it doesn't automatically learn and store parameters from the data. And
+that is key for machine learning. That's why we created Feature-engine.
+
+Feature-engine wraps pandas functionality in Scikit-learn like
+transformers, capturing much of the pandas logic needed to learn and
+store parameters, while making these transformations compatible with
+Scikit-learn estimators, selectors, cross-validation functions and
+hyperparameter search methods.
+
+If your work is primarily data analysis and transformation for machine
+learning, and pandas and scikit-learn are your main tools, then
+Feature-engine is your friend.
+
+## Feature-engine transformers[\#](#feature-engine-transformers)
+
+Feature-engine includes transformers for:
+
+-   Missing data imputation
+
+-   Encoding of categorical features
+
+-   Discretization
+
+-   Outlier capping or removal
+
+-   Feature transformation
+
+-   Creation of new features
+
+-   Feature selection
+
+-   Datetime features
+
+-   Time series
+
+-   Preprocessing
+
+-   Scaling
+
+Feature-engine transformers are fully compatible with scikit-learn. That
+means that you can assemble Feature-engine transformers within a
+Scikit-learn pipeline, or use them in a grid or random search for
+hyperparameters. Check [\*\*Quick
+Start\*\*](quickstart/index.html#quick-start) for an example.
+
+## How did you find us? 👀[\#](#how-did-you-find-us)
+
+We want to share Feature-engine with more people. It'd help us loads if
+you tell us how you discovered us.
+
+Then we can know what we are doing right and which channels we should
+use to share the love.
+
+🙏 Please share your story by answering 1 quick question [at this
+link](https://docs.google.com/forms/d/e/1FAIpQLSfxvgnJvuvPf2XgosakhXo5VNQafqRrjNXkoW5qDWqnuxZNSQ/viewform?usp=sf_link)
+😃
+
+## What is feature engineering?[\#](#what-is-feature-engineering)
+
+Feature engineering is the process of using domain knowledge and
+statistical tools to create features for machine learning algorithms.
+The raw data that we normally gather as part of our business activities
+is rarely fit to train machine learning models. Instead, data scientists
+spend a large part of their time on data analysis, preprocessing, and
+feature engineering.
+
+Pandas is a common library for data preprocessing and feature
+engineering. It supports pretty much every method that is commonly used
+to transform raw data. However, pandas is not compatible with sklearn
+out of the box and is also not able to learn and store the feature
+engineering parameters.
+
+Feature-engine's transformers wrap pandas functionality around an API
+that exposes `fit` and `transform` methods to learn and store parameters
+from data and then use these parameters to transform the variables. Like
+this, Feature-engine makes the awesome functionality available in pandas
+fully compatible with Scikit-Learn.
+
+## What is unique about Feature-engine?[\#](#what-is-unique-about-feature-engine)
+
+The following characteristics make Feature-engine unique:
+
+-   Feature-engine contains the most exhaustive collection of feature
+    engineering transformations.
+
+-   Feature-engine can transform a specific group of variables in the
+    dataframe, right out-of-the-box.
+
+-   Feature-engine returns dataframes, hence suitable for data analysis
+    and model deployment.
+
+-   Feature-engine is compatible with the Scikit-learn pipeline, Grid
+    and Random search and cross validation.
+
+-   Feature-engine automatically recognizes numerical, categorical and
+    datetime variables.
+
+-   Feature-engine alerts you if a transformation is not possible, e.g.,
+    if applying logarithm to negative variables or divisions by 0.
+
+## Installation[\#](#installation)
+
+Feature-engine is a Python 3 package and works well with 3.9 or later.
+
+The simplest way to install Feature-engine is from PyPI with pip:
+
+    $ pip install feature-engine
+
+Note, you can also install it with a \_ as follows:
+
+    $ pip install feature_engine
+
+Feature-engine is an active project and routinely publishes new
+releases. To upgrade Feature-engine to the latest version, use pip like
+this:
+
+    $ pip install -U feature-engine
+
+If you're using Anaconda, you can install the [Anaconda Feature-engine
+package](https://anaconda.org/conda-forge/feature_engine):
+
+    $ conda install -c conda-forge feature_engine
+
+## Feature-engine features in the following tutorials[\#](#feature-engine-features-in-the-following-tutorials)
+
+-   [Feature Engineering for Machine
+    Learning](https://www.trainindata.com/p/feature-engineering-for-machine-learning),
+    Online Course.
+
+-   [Feature Selection for Machine
+    Learning](https://www.trainindata.com/p/feature-selection-for-machine-learning),
+    Online Course.
+
+-   [Feature Engineering for Time Series
+    Forecasting](https://www.trainindata.com/p/feature-engineering-for-forecasting),
+    Online Course.
+
+-   [Python Feature Engineering
+    Cookbook](https://www.packtpub.com/en-us/product/python-feature-engineering-cookbook-9781835883587),
+    book.
+
+-   [Feature Selection in Machine Learning with
+    Python](https://www.trainindata.com/p/feature-selection-in-machine-learning-book),
+    book.
+
+More learning resources in [\*\*Learning
+Resources\*\*](resources/index.html#learning-resources).
+
+## Feature-engine's Transformers[\#](#feature-engine-s-transformers)
+
+Feature-engine hosts the following groups of transformers:
+
+### Missing Data Imputation: Imputers[\#](#missing-data-imputation-imputers)
+
+Missing data imputation consists in replacing missing values in
+categorical data and numerical variables with estimates of those nan
+values or arbitrary data points. Feature-engine supports the following
+missing data imputation methods:
+
+-   [MeanMedianImputer](api_doc/imputation/MeanMedianImputer.html):
+    replaces missing data in numerical variables by the mean or median
+
+-   [ArbitraryNumberImputer](api_doc/imputation/ArbitraryNumberImputer.html):
+    replaces missing data in numerical variables by an arbitrary number
+
+-   [EndTailImputer](api_doc/imputation/EndTailImputer.html): replaces
+    missing data in numerical variables by numbers at the distribution
+    tails
+
+-   [CategoricalImputer](api_doc/imputation/CategoricalImputer.html):
+    replaces missing data with an arbitrary string or by the most
+    frequent category
+
+-   [RandomSampleImputer](api_doc/imputation/RandomSampleImputer.html):
+    replaces missing data by random sampling observations from the
+    variable
+
+-   [AddMissingIndicator](api_doc/imputation/AddMissingIndicator.html):
+    adds a binary missing indicator to flag observations with missing
+    data
+
+-   [DropMissingData](api_doc/imputation/DropMissingData.html): removes
+    observations (rows) containing missing values from dataframe
+
+### Categorical Encoders: Encoders[\#](#categorical-encoders-encoders)
+
+Categorical encoding is the process of replacing categorical values by
+numerical values. Most machine learning models, and in particular, those
+supported by scikit-learn, don't accept strings as inputs. Hence, we
+need to convert these strings into numbers that can be interpeted by
+these models.
+
+There are various categorical encoding techniques, including one hot
+encoding, ordinal encoding and target encoding. Feature-engine supports
+the following methods:
+
+-   [OneHotEncoder](api_doc/encoding/OneHotEncoder.html): performs one
+    hot encoding, optional: of popular categories
+
+-   [CountFrequencyEncoder](api_doc/encoding/CountFrequencyEncoder.html):
+    replaces categories by the observation count or percentage
+
+-   [OrdinalEncoder](api_doc/encoding/OrdinalEncoder.html): replaces
+    categories by numbers arbitrarily or ordered by target
+
+-   [MeanEncoder](api_doc/encoding/MeanEncoder.html): replaces
+    categories by the target mean
+
+-   [WoEEncoder](api_doc/encoding/WoEEncoder.html): replaces categories
+    by the weight of evidence
+
+-   [DecisionTreeEncoder](api_doc/encoding/DecisionTreeEncoder.html):
+    replaces categories by predictions of a decision tree
+
+-   [RareLabelEncoder](api_doc/encoding/RareLabelEncoder.html): groups
+    infrequent categories
+
+-   [StringSimilarityEncoder](api_doc/encoding/StringSimilarityEncoder.html):
+    encodes categories based on string similarity
+
+### Variable Discretization: Discretizers[\#](#variable-discretization-discretizers)
+
+Discretization, or binning, consists in sorting numerical features into
+discrete intervals. The most commonly used methods are equal-width and
+equal-frequency discretization. Feature-engine supports these and more
+advanced methods, like discretization with decision trees:
+
+-   [ArbitraryDiscretiser](api_doc/discretisation/ArbitraryDiscretiser.html):
+    sorts variable into intervals defined by the user
+
+-   [EqualFrequencyDiscretiser](api_doc/discretisation/EqualFrequencyDiscretiser.html):
+    sorts variable into equal frequency intervals
+
+-   [EqualWidthDiscretiser](api_doc/discretisation/EqualWidthDiscretiser.html):
+    sorts variable into equal width intervals
+
+-   [DecisionTreeDiscretiser](api_doc/discretisation/DecisionTreeDiscretiser.html):
+    uses decision trees to create finite variables
+
+-   [GeometricWidthDiscretiser](api_doc/discretisation/GeometricWidthDiscretiser.html):
+    sorts variable into geometrical intervals
+
+### Outlier Capping or Removal[\#](#outlier-capping-or-removal)
+
+Outliers are values that are very different with respect to the
+distribution observed by the variable. Some machine-learning models and
+statistical tests are sensitive to outliers. In some cases, we may want
+to remove outliers or replace them with permitted values.
+
+-   [ArbitraryOutlierCapper](api_doc/outliers/ArbitraryOutlierCapper.html):
+    caps maximum and minimum values at user defined values
+
+-   [Winsorizer](api_doc/outliers/Winsorizer.html): caps maximum or
+    minimum values using statistical parameters
+
+-   [OutlierTrimmer](api_doc/outliers/OutlierTrimmer.html): removes
+    outliers from the dataset
+
+### Numerical Transformation: Transformers[\#](#numerical-transformation-transformers)
+
+We normally use variance stabilizing transformations to make the data
+meet the assumptions of certain statistical tests, like anova, and
+machine learning models, like linear regression. Feature-engine supports
+the following transformations:
+
+-   [LogTransformer](api_doc/transformation/LogTransformer.html):
+    performs logarithmic transformation of numerical variables
+
+-   [LogCpTransformer](api_doc/transformation/LogCpTransformer.html):
+    performs logarithmic transformation after adding a constant value
+
+-   [ReciprocalTransformer](api_doc/transformation/ReciprocalTransformer.html):
+    performs reciprocal transformation of numerical variables
+
+-   [PowerTransformer](api_doc/transformation/PowerTransformer.html):
+    performs power transformation of numerical variables
+
+-   [BoxCoxTransformer](api_doc/transformation/BoxCoxTransformer.html):
+    performs Box-Cox transformation of numerical variables
+
+-   [YeoJohnsonTransformer](api_doc/transformation/YeoJohnsonTransformer.html):
+    performs Yeo-Johnson transformation of numerical variables
+
+-   [ArcsinTransformer](api_doc/transformation/ArcsinTransformer.html):
+    performs arcsin transformation of numerical variables
+
+### Feature Creation:[\#](#feature-creation)
+
+Feature-engine allows you to create new features by combining them
+mathematically or transforming them with mathematical functions:
+
+-   [MathFeatures](api_doc/creation/MathFeatures.html): creates new
+    variables by combining features with mathematical operations
+
+-   [RelativeFeatures](api_doc/creation/RelativeFeatures.html): combines
+    variables with reference features
+
+-   [CyclicalFeatures](api_doc/creation/CyclicalFeatures.html): creates
+    variables using sine and cosine, suitable for cyclical features
+
+-   [DecisionTreeFeatures](api_doc/creation/DecisionTreeFeatures.html):
+    creates variables resulting from predictions of decision trees on 1
+    or more features
+
+### Datetime:[\#](#datetime)
+
+Data scientists rarely use datetime features in their original
+representation with machine learning models. Instead, we extract many
+new features from the date and time parts of the datetime variable:
+
+-   [DatetimeFeatures](api_doc/datetime/DatetimeFeatures.html): extract
+    features from datetime variables
+
+-   [DatetimeSubtraction](api_doc/datetime/DatetimeSubtraction.html):
+    computes subtractions between datetime variables
+
+### Feature Selection:[\#](#feature-selection)
+
+Simpler models are easier to interpret, deploy, and maintain.
+Feature-engine expands the feature selection functionality existing in
+other libraries like sklearn and MLXtend, with additional methods:
+
+-   [DropFeatures](api_doc/selection/DropFeatures.html): drops an
+    arbitrary subset of variables from a dataframe
+
+-   [DropConstantFeatures](api_doc/selection/DropConstantFeatures.html):
+    drops constant and quasi-constant variables from a dataframe
+
+-   [DropDuplicateFeatures](api_doc/selection/DropDuplicateFeatures.html):
+    drops duplicated variables from a dataframe
+
+-   [DropCorrelatedFeatures](api_doc/selection/DropCorrelatedFeatures.html):
+    drops correlated variables from a dataframe
+
+-   [SmartCorrelatedSelection](api_doc/selection/SmartCorrelatedSelection.html):
+    selects best features from correlated groups
+
+-   [DropHighPSIFeatures](api_doc/selection/DropHighPSIFeatures.html):
+    selects features based on the Population Stability Index (PSI)
+
+-   [SelectByInformationValue](api_doc/selection/SelectByInformationValue.html):
+    selects features based on their information value
+
+-   [SelectByShuffling](api_doc/selection/SelectByShuffling.html):
+    selects features by evaluating model performance after feature
+    shuffling
+
+-   [SelectBySingleFeaturePerformance](api_doc/selection/SelectBySingleFeaturePerformance.html):
+    selects features based on their performance on univariate estimators
+
+-   [SelectByTargetMeanPerformance](api_doc/selection/SelectByTargetMeanPerformance.html):
+    selects features based on target mean encoding performance
+
+-   [RecursiveFeatureElimination](api_doc/selection/RecursiveFeatureElimination.html):
+    selects features recursively, by evaluating model performance
+
+-   [RecursiveFeatureAddition](api_doc/selection/RecursiveFeatureAddition.html):
+    selects features recursively, by evaluating model performance
+
+-   [ProbeFeatureSelection](api_doc/selection/ProbeFeatureSelection.html):
+    selects features whose importance is greater than those of random
+    variables
+
+-   [MRMR](api_doc/selection/MRMR.html): selects features based on the
+    Maximum Relevance Minimum Redundancy framework
+
+### Forecasting:[\#](#forecasting)
+
+To address forecasting as a regression by using traditional machine
+learning algorithms, we first need to transform the time series into a
+table of static fetaures. We can do this through lags and windows
+combined with aggregations over past data:
+
+-   [LagFeatures](api_doc/timeseries/forecasting/LagFeatures.html):
+    extract lag features
+
+-   [WindowFeatures](api_doc/timeseries/forecasting/WindowFeatures.html):
+    create window features
+
+-   [ExpandingWindowFeatures](api_doc/timeseries/forecasting/ExpandingWindowFeatures.html):
+    create expanding window features
+
+### Preprocessing:[\#](#preprocessing)
+
+When transforming variables and doing data cleaning, we usually change
+the variables data types (dtype in pandas). These can cause problems
+further down the pipeline. To tackle this head on, Feature-engine has
+transformers to ensure the data types and variable names match.
+
+-   [MatchCategories](api_doc/preprocessing/MatchCategories.html):
+    ensures categorical variables are of type 'category'
+
+-   [MatchVariables](api_doc/preprocessing/MatchVariables.html): ensures
+    that columns in test set match those in train set
+
+### Scaling:[\#](#scaling)
+
+Scaling the data can help to balance the impact of all variables on the
+model, and can improve its performance.
+
+-   [MeanNormalizationScaler](api_doc/scaling/MeanNormalizationScaler.html):
+    scale variables using mean normalization
+
+### Scikit-learn Wrapper:[\#](#scikit-learn-wrapper)
+
+An alternative to scikit-learn's `ColumnTransformer`:
+
+-   [SklearnTransformerWrapper](api_doc/wrappers/Wrapper.html): applies
+    Scikit-learn transformers to a selected subset of features
+
+## Feature scaling[\#](#feature-scaling)
+
+Scikit-learn offers a comprehensive array of tools to apply data
+normalization, standardization, and min-max scaling, among other
+processes, so we felt that there was no need to bring that functionality
+to Feature-engine. If you want to apply these procedures to a subset of
+the variables only, check out the
+[SklearnTransformerWrapper](api_doc/wrappers/Wrapper.html):
+
+## Getting Help[\#](#getting-help)
+
+Can't get something to work? Here are places where you can find help.
+
+1.  The [\*\*User Guide\*\*](user_guide/index.html#user-guide) in the
+    docs.
+
+2.  [Stack Overflow](https://stackoverflow.com/search?q=feature_engine).
+    If you ask a question, please mention "feature_engine" in it.
+
+3.  If you are enrolled in the [Feature Engineering for Machine Learning
+    course](https://www.trainindata.com/p/feature-engineering-for-machine-learning)
+    , post a question in a relevant section.
+
+4.  If you are enrolled in the [Feature Selection for Machine Learning
+    course](https://www.trainindata.com/p/feature-selection-for-machine-learning)
+    , post a question in a relevant section.
+
+5.  Join our [gitter
+    community](https://gitter.im/feature_engine/community). You an ask
+    questions here as well.
+
+6.  Ask a question in the repo by filing an
+    [issue](https://github.com/feature-engine/feature_engine/issues/)
+    (check before if there is already a similar issue created :) ).
+
+## Contributing[\#](#contributing)
+
+Interested in contributing to Feature-engine? That is great news!
+
+Feature-engine is a welcoming and inclusive project and we would be
+delighted to have you on board. We follow the [Python Software
+Foundation Code of Conduct](http://www.python.org/psf/codeofconduct/).
+
+Regardless of your skill level you can help us. We appreciate bug
+reports, user testing, feature requests, bug fixes, addition of tests,
+product enhancements, and documentation improvements. We also appreciate
+blogs about Feature-engine. If you happen to have one, let us know!
+
+For more details on how to contribute check the contributing page. Click
+on the [\*\*Contribute\*\*](contribute/index.html#contribute) guide.
+
+## Sponsor us[\#](#sponsor-us)
+
+[Empower Sole](https://github.com/sponsors/solegalli), the main
+developer of Feature-engine, to assemble a team of paid contributors to
+accelerate the development of Feature-engine.
+
+Currently, Sole and our contributors dedicate their free time
+voluntarily to advancing the project. You can help us reach a funding
+milestone so that we can gather a group of 2-3 contributors who will
+commit regular hours each week to enhance documentation and expand
+Feature-engine's functionality at a faster pace.
+
+[Your contribution](https://github.com/sponsors/solegalli) will play a
+vital role in propelling Feature-engine to new heights, ensuring it
+remains a valuable resource for the data science community.
+
+If you don't have a Github account, you can also [sponsor us
+here](https://buymeacoffee.com/solegalliy).
+
+## Open Source[\#](#open-source)
+
+Feature-engine's
+[license](https://github.com/feature-engine/feature_engine/blob/master/LICENSE.md)
+is an open source BSD 3-Clause.
+
+Feature-engine is hosted on
+[GitHub](https://github.com/feature-engine/feature_engine/). The
+[issues](https://github.com/feature-engine/feature_engine/issues/) and
+[pull requests](https://github.com/feature-engine/feature_engine/pulls)
+are tracked there.
+
+## Table of Contents[\#](#table-of-contents)
+
+-   [Quick Start](quickstart/index.html)
+    -   [Installation](quickstart/index.html#installation)
+    -   [Example Use](quickstart/index.html#example-use)
+    -   [Feature-engine with the Scikit-learn's
+        pipeline](quickstart/index.html#feature-engine-with-the-scikit-learn-s-pipeline)
+-   [User Guide](user_guide/index.html)
+    -   [Transformation](user_guide/index.html#transformation)
+    -   [Creation](user_guide/index.html#creation)
+    -   [Selection](user_guide/index.html#selection)
+    -   [Time series](user_guide/index.html#time-series)
+    -   [Other](user_guide/index.html#other)
+    -   [Pipeline](user_guide/index.html#pipeline)
+    -   [Tools](user_guide/index.html#tools)
+-   [API](api_doc/index.html)
+    -   [Transformation](api_doc/index.html#transformation)
+    -   [Creation](api_doc/index.html#creation)
+    -   [Selection](api_doc/index.html#selection)
+    -   [Time series](api_doc/index.html#time-series)
+    -   [Other](api_doc/index.html#other)
+    -   [Pipeline](api_doc/index.html#pipeline)
+    -   [Datasets](api_doc/index.html#datasets)
+    -   [Tools](api_doc/index.html#tools)
+-   [Resources](resources/index.html)
+    -   [Courses](resources/courses.html)
+    -   [Books](resources/books.html)
+    -   [Blogs, Videos and More](resources/blogs.html)
+    -   [Tutorials](resources/tutorials.html)
+-   [Contribute](contribute/index.html)
+    -   [Ways to contribute](contribute/index.html#ways-to-contribute)
+    -   [Getting in touch](contribute/index.html#getting-in-touch)
+    -   [Contributing Guide](contribute/index.html#contributing-guide)
+-   [About](about/index.html)
+    -   [About](about/about.html)
+    -   [Governance](about/governance.html)
+    -   [Roadmap](about/roadmap.html)
+-   [What's new](whats_new/index.html)
+    -   [Version 1.8.X](whats_new/v_180.html)
+    -   [Version 1.7.X](whats_new/v_170.html)
+    -   [Version 1.6.X](whats_new/v_160.html)
+    -   [Version 1.5.X](whats_new/v_150.html)
+    -   [Version 1.4.X](whats_new/v_140.html)
+    -   [Version 1.3.X](whats_new/v_130.html)
+    -   [Version 1.2.X](whats_new/v_120.html)
+    -   [Version 1.1.X](whats_new/v_1.html)
+    -   [Version 0.6.X](whats_new/v_06.html)
+-   [Other versions](versions/index.html)
+-   [Sponsor us](donate.html)
+-   [Sponsors](donate.html#sponsors)
+
+[](quickstart/index.html)
+
+next
+
+Quick Start
+
+On this page
+
+-   [A user-friendly feature engineering alternative to
+    Scikit-learn](#a-user-friendly-feature-engineering-alternative-to-scikit-learn)
+    -   [Working with dataframes? 👉 Feature-engine is a
+        no-brainer](#working-with-dataframes-feature-engine-is-a-no-brainer)
+    -   [Sitting at the interface of pandas and
+        scikit-learn](#sitting-at-the-interface-of-pandas-and-scikit-learn)
+-   [Feature-engine transformers](#feature-engine-transformers)
+-   [How did you find us? 👀](#how-did-you-find-us)
+-   [What is feature engineering?](#what-is-feature-engineering)
+-   [What is unique about
+    Feature-engine?](#what-is-unique-about-feature-engine)
+-   [Installation](#installation)
+-   [Feature-engine features in the following
+    tutorials](#feature-engine-features-in-the-following-tutorials)
+-   [Feature-engine's Transformers](#feature-engine-s-transformers)
+    -   [Missing Data Imputation:
+        Imputers](#missing-data-imputation-imputers)
+    -   [Categorical Encoders: Encoders](#categorical-encoders-encoders)
+    -   [Variable Discretization:
+        Discretizers](#variable-discretization-discretizers)
+    -   [Outlier Capping or Removal](#outlier-capping-or-removal)
+    -   [Numerical Transformation:
+        Transformers](#numerical-transformation-transformers)
+    -   [Feature Creation:](#feature-creation)
+    -   [Datetime:](#datetime)
+    -   [Feature Selection:](#feature-selection)
+    -   [Forecasting:](#forecasting)
+    -   [Preprocessing:](#preprocessing)
+    -   [Scaling:](#scaling)
+    -   [Scikit-learn Wrapper:](#scikit-learn-wrapper)
+-   [Feature scaling](#feature-scaling)
+-   [Getting Help](#getting-help)
+-   [Contributing](#contributing)
+-   [Sponsor us](#sponsor-us)
+-   [Open Source](#open-source)
+-   [Table of Contents](#table-of-contents)
+
+[ Show Source](_sources/index.rst.txt)
+
+
