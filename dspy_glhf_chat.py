@@ -1,8 +1,16 @@
-import dspy
 import openai
 
-class OpenAICompatibleStep(dspy.Step):
+# Define a custom Step class if dspy.Step is not available
+class Step:
+    def __init__(self):
+        pass
+
+    def process(self, data):
+        raise NotImplementedError("Subclasses must implement the 'process' method.")
+
+class OpenAICompatibleStep(Step):
     def __init__(self, api_key, base_url, model_id):
+        super().__init__()
         self.api_key = api_key
         self.base_url = base_url
         self.model_id = model_id
@@ -21,21 +29,22 @@ class OpenAICompatibleStep(dspy.Step):
 # Example usage
 if __name__ == "__main__":
     # Replace with your actual API key
-    api_key = "glhf_544c3ea34a2f1d6ea03bf6e1709cd759"
+    api_key = "your-api-key"
     base_url = "https://glhf.chat/api/openai/v1"
     model_id = "hf:meta-llama/Llama-3.3-70B-Instruct"
 
-    # Create a pipeline
-    pipeline = dspy.Pipeline()
-    pipeline.add_step(dspy.DataLoader())
-    pipeline.add_step(OpenAICompatibleStep(
+    # Create a pipeline (simplified for testing)
+    data_loader = lambda x: x  # Mock data loader
+    openai_step = OpenAICompatibleStep(
         api_key=api_key,
         base_url=base_url,
         model_id=model_id
-    ))
-    pipeline.add_step(dspy.ModelTrainer())
+    )
+    model_trainer = lambda x: x  # Mock model trainer
 
     # Run the pipeline with sample data
     sample_data = "Hello, how are you?"
-    result = pipeline.run(sample_data)
-    print("Pipeline Result:", result)
+    processed_data = data_loader(sample_data)
+    openai_result = openai_step.process(processed_data)
+    final_result = model_trainer(openai_result)
+    print("Pipeline Result:", final_result)
