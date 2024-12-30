@@ -23,3 +23,32 @@
 * Updating Scrapy spider to use latest version of Scrapy
 * Fixing Scrapy item pipeline to handle new data format
 * Optimizing Scrapy project for performance
+
+## Orchestrator-Workers Pattern
+
+The Orchestrator-Workers pattern is used for complex scraping tasks that involve multiple steps. It divides the process into modular components:
+
+1. **Orchestrator**: Manages the overall workflow, delegating tasks to workers and synthesizing results.
+2. **Extraction Worker**: Handles data extraction from the target website.
+3. **Transformation Worker**: Cleans and normalizes the extracted data.
+4. **Storage Worker**: Saves the cleaned data to the database.
+
+### Example Workflow
+```python
+from aider_coder.orchestrator import Orchestrator
+
+task = {
+    "url": "https://example.com",
+    "extraction_rules": {...},
+    "transformation_rules": {...},
+    "storage_config": {...}
+}
+
+orchestrator = Orchestrator()
+result = orchestrator.process(task)
+```
+
+### Benefits
+- **Modularity**: Each worker focuses on a specific task.
+- **Flexibility**: The orchestrator can adapt the workflow dynamically.
+- **Scalability**: Workers can process data in parallel.

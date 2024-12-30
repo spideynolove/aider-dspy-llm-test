@@ -10,6 +10,7 @@ Aider-Coder is a Python-based assistant for Scrapy project development, specific
 - **Dynamic Content Handling**: Integrated Scrapy-Playwright support
 - **Code Validation**: Automated spider code validation
 - **Configuration Management**: Centralized environment configuration
+- **Orchestrator-Workers Pattern**: Modular workflow for complex scraping tasks
 
 ## Installation
 
@@ -85,7 +86,6 @@ test_code = aider.generate_test_template("my_spider")
 
 # Validate pipeline
 is_valid = aider.validate_pipeline(pipeline_code)
-```
 ```
 
 ## Configuration
