@@ -120,19 +120,34 @@ The files in the `.aider` folder were likely created with the help of an AI mode
 ---
 
 ## **5. Next Steps for You**
-To replicate or adapt this setup:
+To configure `.aider` as a coding assistant:
 1. **Set Up `.env`**:
    - Create a `.env` file based on `.env.example` and add your API keys.
 2. **Install `aider`**:
    - Install the `aider` CLI tool if not already installed.
-3. **Run the Functions**:
-   - Use the PowerShell module to automate tasks:
+3. **Configure Automation**:
+   - Add PowerShell functions to automate tasks like:
      ```powershell
-     Import-Module .aider/aider.psm1
-     Update-PesterTest -First 10 -Model "claude-3-5-sonnet-20240620"
+     function Automate-CodeReview {
+         param($FilePath)
+         Invoke-Aider -Message "Review code for best practices" -File $FilePath
+     }
      ```
-4. **Experiment with Prompts**:
+4. **Set Up Iterative Workflows**:
+   - Create scripts to process files until completion:
+     ```powershell
+     $files = Get-ChildItem -Path "src/" -Recurse -Include *.ps1
+     foreach ($file in $files) {
+         Automate-CodeReview -FilePath $file.FullName
+     }
+     ```
+5. **Experiment with Prompts**:
    - Modify the prompt templates in `prompts/` to suit your project's needs.
+6. **Set Up Monitoring**:
+   - Add logging to track assistant activity:
+     ```powershell
+     Start-Transcript -Path "aider-log.txt"
+     ```
 
 ---
 
