@@ -1,6 +1,7 @@
 import json
 import datetime
 import os
+import dspy
 
 LOG_FILE_PATH = os.path.join(os.getcwd(), "api_requests.log")
 MAX_LOG_SIZE = 10 * 1024 * 1024  # 10 MB

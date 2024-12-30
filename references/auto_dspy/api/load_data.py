@@ -25,6 +25,8 @@ def load_and_parse_log_data(log_file_path):
     except FileNotFoundError:
         print(f"Log file not found: {log_file_path}")
         return None
+    
+    return log_entries
 def _extract_question(log_entry):
     """
     Extracts the question from a log entry.
@@ -57,7 +59,7 @@ def _extract_answer(log_entry):
         str: The extracted answer, or None if not found.
     """
     response_data = log_entry.get("response_data", {})
-    if response_data and "choices" in response_
+    if response_data and "choices" in response_data:
         first_choice = response_data["choices"][0]
         if "message" in first_choice and first_choice["message"].get("role") == "assistant":
             return first_choice["message"].get("content")
