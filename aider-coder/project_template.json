@@ -1,0 +1,34 @@
+{
+    "project_name": "example_project",
+    "description": "Scrape financial data from example.com",
+    "data_type": "OHLCV",
+    "website": {
+        "url": "https://example.com",
+        "structure": {
+            "pagination": "API-based",
+            "dynamic_content": true,
+            "authentication": false
+        }
+    },
+    "output": {
+        "format": "JSON",
+        "fields": [
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "timestamp"
+        ],
+        "storage": {
+            "primary": "MongoDB",
+            "secondary": "PostgreSQL"
+        }
+    },
+    "settings": {
+        "concurrency": 8,
+        "download_delay": 1,
+        "retry_times": 3,
+        "timeout": 30
+    }
+}
