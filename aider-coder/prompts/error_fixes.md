@@ -94,3 +94,48 @@ producer = KafkaProducer(
     bootstrap_servers=f"{os.getenv('KAFKA_HOST')}:{os.getenv('KAFKA_PORT')}",
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
+
+## 8. Proxy Connection Issues
+**Error:** `TimeoutError: Connection to proxy timed out`
+**Solution:** Implement proxy rotation and retry mechanism
+
+```python
+class ProxyMiddleware:
+    def __init__(self, proxy_list):
+        self.proxy_list = proxy_list
+        self.current_proxy = 0
+
+    def process_request(self, request, spider):
+        if self.proxy_list:
+            request.meta['proxy'] = self.proxy_list[self.current_proxy]
+            self.current_proxy = (self.current_proxy + 1) % len(self.proxy_list)
+
+## 9. User-Agent Issues
+**Error:** `403 Forbidden`
+**Solution:** Implement user-agent rotation
+
+```python
+class RandomUserAgentMiddleware:
+    def __init__(self, user_agents):
+        self.user_agents = user_agents
+
+    def process_request(self, request, spider):
+        request.headers['User-Agent'] = random.choice(self.user_agents)
+```
+
+## 10. Test Failures
+**Error:** `AssertionError: Test failed`
+**Solution:** Ensure proper test coverage and mock responses
+
+```python
+from scrapy.http import HtmlResponse
+
+def test_parse():
+    response = HtmlResponse(
+        url='http://example.com',
+        body='<html><div class="data">test</div></html>',
+        encoding='utf-8'
+    )
+    results = list(spider.parse(response))
+    assert len(results) > 0
+```

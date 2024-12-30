@@ -138,6 +138,60 @@ class AiderCoder:
         """Add item to Redis queue"""
         self.redis_client.rpush(queue_name, value)
 
+    def configure_middleware(self, settings: dict) -> dict:
+        """Configure common Scrapy middleware settings"""
+        default_middleware = {
+            'DOWNLOADER_MIDDLEWARES': {
+                'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
+                'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': 400,
+                'scrapy.downloadermiddlewares.retry.RetryMiddleware': 500,
+            },
+            'RETRY_TIMES': 3,
+            'RETRY_HTTP_CODES': [500, 502, 503, 504, 522, 524, 408, 429]
+        }
+        return {**default_middleware, **settings}
+
+    def configure_proxies(self, proxy_list: list) -> dict:
+        """Configure proxy settings for Scrapy"""
+        return {
+            'PROXY_LIST': proxy_list,
+            'DOWNLOADER_MIDDLEWARES': {
+                'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
+            }
+        }
+
+    def validate_pipeline(self, pipeline_code: str) -> bool:
+        """Validate pipeline code structure"""
+        required_methods = ['process_item', 'open_spider', 'close_spider']
+        return all(method in pipeline_code for method in required_methods)
+
+    def generate_test_template(self, spider_name: str) -> str:
+        """Generate a basic test template for a spider"""
+        return f"""
+import unittest
+from scrapy.http import HtmlResponse
+from myproject.spiders.{spider_name} import {spider_name.capitalize()}Spider
+
+class Test{spider_name.capitalize()}Spider(unittest.TestCase):
+    def setUp(self):
+        self.spider = {spider_name.capitalize()}Spider()
+
+    def test_parse(self):
+        # Create a fake response
+        response = HtmlResponse(
+            url='http://example.com',
+            body='<html></html>',
+            encoding='utf-8'
+        )
+        
+        # Test parse method
+        results = list(self.spider.parse(response))
+        self.assertGreater(len(results), 0)
+
+if __name__ == '__main__':
+    unittest.main()
+"""
+
 if __name__ == "__main__":
     aider = AiderCoder()
     spider_code = aider.generate_spider_code()

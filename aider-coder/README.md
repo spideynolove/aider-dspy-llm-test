@@ -66,6 +66,28 @@ results = aider.execute_pg_query(
 )
 ```
 
+### Middleware Configuration
+```python
+# Configure default middleware
+settings = aider.configure_middleware({})
+
+# Configure proxies
+proxy_settings = aider.configure_proxies([
+    'http://proxy1.example.com:8080',
+    'http://proxy2.example.com:8080'
+])
+```
+
+### Testing Support
+```python
+# Generate test template
+test_code = aider.generate_test_template("my_spider")
+
+# Validate pipeline
+is_valid = aider.validate_pipeline(pipeline_code)
+```
+```
+
 ## Configuration
 
 Edit the `.env` file to configure:
