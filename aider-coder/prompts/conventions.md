@@ -52,3 +52,27 @@ result = orchestrator.process(task)
 - **Modularity**: Each worker focuses on a specific task.
 - **Flexibility**: The orchestrator can adapt the workflow dynamically.
 - **Scalability**: Workers can process data in parallel.
+
+## LLM-Based Orchestrator-Workers Workflow
+
+This workflow uses Claude Sonnet as both the orchestrator and workers to handle Scrapy project development:
+
+1. **Orchestrator**: Breaks down the project into smaller tasks.
+2. **Workers**: Complete individual tasks (e.g., spider creation, pipeline optimization).
+3. **Synthesizer**: Combines the results into a complete project.
+
+### Example Workflow
+```python
+from aider_coder.llm_orchestrator import LLMOrchestrator
+
+project_description = "Scrape OHLCV data from example.com with pagination and dynamic content handling."
+
+orchestrator = LLMOrchestrator()
+project_code = orchestrator.process_project(project_description)
+print(project_code)
+```
+
+### Benefits
+- **Modularity**: Each task is handled independently.
+- **Scalability**: Multiple workers can process tasks in parallel.
+- **Flexibility**: The orchestrator can adapt the workflow dynamically.

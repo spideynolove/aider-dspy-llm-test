@@ -11,6 +11,7 @@ Aider-Coder is a Python-based assistant for Scrapy project development, specific
 - **Code Validation**: Automated spider code validation
 - **Configuration Management**: Centralized environment configuration
 - **Orchestrator-Workers Pattern**: Modular workflow for complex scraping tasks
+- **LLM-Based Orchestrator-Workers Workflow**: Modular workflow for complex Scrapy project development using Claude Sonnet
 
 ## Installation
 
@@ -103,6 +104,7 @@ Edit the `.env` file to configure:
 aider-coder/
 ├── .env.example            # Environment configuration template
 ├── aider-coder.py          # Main AiderCoder implementation
+├── llm_orchestrator.py     # LLM-based orchestrator implementation
 ├── requirements.txt        # Python dependencies
 ├── README.md               # This documentation
 ├── prompts/                # AI prompt templates
