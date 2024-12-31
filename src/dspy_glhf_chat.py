@@ -2,8 +2,8 @@ from openai import OpenAI
 import os
 from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
+# Load environment variables from the .env file in the parent directory
+load_dotenv('../.env')
 
 # Define a custom Step class if dspy.Step is not available
 class Step:
