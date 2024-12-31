@@ -4,6 +4,7 @@
 
 sample_project
 src/langwatch-test
+src/local_cache
 
 # environment variables
 .env
