@@ -20,10 +20,15 @@ def load_and_parse_log_data(log_file_path):
                 try:
                     log_entry = json.loads(line)
                     log_entries.append(log_entry)
-                except json.JSONDecodeError:
+                except json.JSONDecodeError as e:
                     print(f"Skipping invalid JSON line: {line.strip()}")
+                    print(f"Error details: {str(e)}")
+            return log_entries
     except FileNotFoundError:
         print(f"Log file not found: {log_file_path}")
+        return None
+    except Exception as e:
+        print(f"Error loading log file: {str(e)}")
         return None
 def _extract_question(log_entry):
     """
@@ -57,7 +62,7 @@ def _extract_answer(log_entry):
         str: The extracted answer, or None if not found.
     """
     response_data = log_entry.get("response_data", {})
-    if response_data and "choices" in response_
+    if response_data and "choices" in response_data:
         first_choice = response_data["choices"][0]
         if "message" in first_choice and first_choice["message"].get("role") == "assistant":
             return first_choice["message"].get("content")

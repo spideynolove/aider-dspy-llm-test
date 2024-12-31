@@ -30,8 +30,15 @@ def trigger_training(api_url, model, messages):
 
 
 if __name__ == "__main__":
+    # Define your LLM model using LiteLLM
+    from dotenv import load_dotenv
+    import os
+
+    # Load environment variables
+    load_dotenv('config/.env', override=True)
+    
     api_url = "http://0.0.0.0:5000/chat/completions"  # Replace with your API URL
-    model = "gpt-3.5-turbo"  # Replace with your desired model
+    model = os.getenv('OPENAI_MODEL_ID')  # Get model from environment variable
 
     # Initial request to log data
     messages = [{"role": "user", "content": "What is the capital of France?"}]

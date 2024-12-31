@@ -8,20 +8,23 @@ import datetime
 from flask import Flask, request, jsonify
 from api.litellm_client import _call_litellm
 from api.utils import _serialize_response, _log_request
+import dspy
 from dspy_pipeline.pipeline import DSPyPipeline
 from dspy_pipeline.signatures import ChatCompletionSignature
-import dspy
 import litellm
-import os
 
+# Configure DSPy before pipeline initialization
+from dotenv import load_dotenv
+load_dotenv('config/.env', override=True)
 
-# Define your LLM model using LiteLLM
-model_name = "gpt-3.5-turbo" # Replace with your desired model
-lm = dspy.LM(model=f"openai/{model_name}", max_tokens=500, temperature=0.1)
-
-# Configure DSPy to use the LLM
+lm = dspy.LM(
+    model=os.getenv('OPENAI_MODEL_ID'),
+    api_key=os.getenv('OPENAI_API_KEY'),
+    api_base=os.getenv('OPENAI_BASE_URL'),
+    max_tokens=500,
+    temperature=0.1
+)
 dspy.configure(lm=lm)
-
 
 # Ensure logging configuration is correctly set up
 if not os.path.exists(os.path.join(os.getcwd(), "logs")):
@@ -61,13 +64,22 @@ def _handle_chat_completions():
         try:
             # Use the DSPy pipeline to generate the response
             question = messages[-1]["content"]
-            prediction = pipeline(question)
-            serialized_response = _serialize_response(prediction)
+            prediction = pipeline(question=question)
+            if not hasattr(prediction, 'answer'):
+                return jsonify({"error": "Invalid response format from pipeline"}), 500
+            serialized_response = {
+                "choices": [{
+                    "message": {
+                        "role": "assistant",
+                        "content": prediction.answer
+                    }
+                }]
+            }
             _log_request(data, serialized_response)
             return jsonify(serialized_response)
         except Exception as e:
             print(f"Error during DSPy pipeline execution: {e}")
-            return jsonify({"error": str(e)}), 500
+            return jsonify({"error": f"Pipeline execution failed: {str(e)}"}), 500
     except ValueError as e:
         print(f"Error handling chat completions: {e}")
         return jsonify({"error": str(e)}), 500

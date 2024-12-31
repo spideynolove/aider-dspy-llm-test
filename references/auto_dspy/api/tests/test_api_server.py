@@ -1,7 +1,11 @@
 import pytest
 import os
+from dotenv import load_dotenv
 from unittest.mock import patch
 from api.api_server import app
+
+# Load environment variables
+load_dotenv('../../config/.env', override=True)
 
 
 @pytest.fixture
@@ -19,7 +23,7 @@ def test_chat_completions_success(client):
 
     # Test with a valid request
     data = {
-        "model": "gpt-3.5-turbo",
+        "model": os.getenv('OPENAI_MODEL_ID'),
         "messages": [{"role": "user", "content": "hello"}],
         "temperature": 0.5,
         "max_tokens": 10,

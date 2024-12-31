@@ -1,7 +1,11 @@
 import pytest
 import os
 import json
+from dotenv import load_dotenv
 from api.load_data import load_and_parse_log_data
+
+# Load environment variables
+load_dotenv('../../config/.env', override=True)
 
 
 def create_dummy_log_file(content, filename="test_log.log"):
@@ -22,8 +26,8 @@ def remove_dummy_log_file(filename):
 def test_load_and_parse_log_data_success():
     """Test loading and parsing valid JSON log data."""
     log_content = """
-    {"timestamp": "2024-05-02T10:00:00", "request_data": {"model": "gpt-3.5-turbo", "messages": [{"role": "user", "content": "hello"}]}}
-    {"timestamp": "2024-05-02T10:05:00", "request_data": {"model": "gpt-4", "messages": [{"role": "user", "content": "how are you?"}]}}
+    {"timestamp": "2024-05-02T10:00:00", "request_data": {"model": os.getenv('OPENAI_MODEL_ID'), "messages": [{"role": "user", "content": "hello"}]}}
+    {"timestamp": "2024-05-02T10:05:00", "request_data": {"model": os.getenv('OPENAI_MODEL_ID'), "messages": [{"role": "user", "content": "how are you?"}]}}
     """
     log_file = create_dummy_log_file(log_content)
     loaded_data = load_and_parse_log_data(log_file)
