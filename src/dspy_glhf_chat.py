@@ -1,5 +1,9 @@
 from openai import OpenAI
+import os
+from dotenv import load_dotenv
 
+# Load environment variables
+load_dotenv()
 
 # Define a custom Step class if dspy.Step is not available
 class Step:
@@ -12,13 +16,13 @@ class Step:
 
 
 class OpenAICompatibleStep(Step):
-    def __init__(self, api_key, base_url, model_id):
+    def __init__(self):
         super().__init__()
         self.client = OpenAI(
-            api_key=api_key,
-            base_url=base_url
+            api_key=os.getenv('OPENAI_API_KEY'),
+            base_url=os.getenv('OPENAI_BASE_URL')
         )
-        self.model_id = model_id
+        self.model_id = os.getenv('OPENAI_MODEL_ID')
 
     def process(self, data):
         # Process data using the OpenAI-compatible API
@@ -31,22 +35,12 @@ class OpenAICompatibleStep(Step):
 
 # Example usage
 if __name__ == "__main__":
-    # Replace with your actual API key
-    api_key = "glhf_544c3ea34a2f1d6ea03bf6e1709cd759"
-    base_url = "https://glhf.chat/api/openai/v1"
-    model_id = "hf:meta-llama/Llama-3.3-70B-Instruct"
-
     # Create a pipeline (simplified for testing)
     def data_loader(x): return x  # Mock data loader
-    openai_step = OpenAICompatibleStep(
-        api_key=api_key,
-        base_url=base_url,
-        model_id=model_id
-    )
+    openai_step = OpenAICompatibleStep()
     def model_trainer(x): return x  # Mock model trainer
 
     # Run the pipeline with sample data
-    # sample_data = "How to start a Tech startup focused on AI?"
     sample_data = "How can i using scrapy to scrape data from a website?"
     processed_data = data_loader(sample_data)
     openai_result = openai_step.process(processed_data)

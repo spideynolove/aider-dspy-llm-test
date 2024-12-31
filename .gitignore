@@ -4,3 +4,6 @@
 
 sample_project
 src/langwatch-test
+
+# environment variables
+.env
